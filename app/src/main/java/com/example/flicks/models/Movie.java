@@ -6,11 +6,18 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
+@Parcel
 public class Movie {
     String posterPath;
     String title;
     String overview;
+    double rating;
+    int movieId;
+
+    // empty constructor required by Parcel
+    public Movie() { }
 
 
     public Movie(JSONObject jsonObject) throws JSONException {
@@ -18,6 +25,8 @@ public class Movie {
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
+        rating = jsonObject.getDouble("vote_average");
+        movieId = jsonObject.getInt("id");
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
@@ -41,4 +50,8 @@ public class Movie {
     public String getTitle() {
         return title;
     }
+
+    public double getRating() { return rating; }
+
+    public int getMovieId() { return movieId; }
 }
